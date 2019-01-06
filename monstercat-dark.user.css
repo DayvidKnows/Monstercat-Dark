@@ -1,9 +1,7 @@
 /* ==UserStyle==
 @name           Monstercat Dark
 @namespace      github.com/openstyles/stylus
-@version        1.0.0
-@homepageURL    https://github.com/DayvidKnows/Monstercat-Dark
-@updateURL      https://raw.githubusercontent.com/DayvidKnows/Monstercat-Dark/master/monstercat-dark.user.css
+@version        1.1.0
 @description    A dark theme for Monstercat
 @license        CC BY-ND 4.0
 @author         DayvidKnows
@@ -14,10 +12,9 @@
 		--site-background: hsl(0, 0%, 13%);
 		--container-background: hsl(0, 0%, 20%);
 		--font-color: hsl(0, 0%, 93%);
+		--font-color-transparent: hsla(0, 0%, 93%, .13);
 		--accent-color: /*[[accent]]*/;
-		--gold: #f1d383;
 	}
-
 
 	img.logo-black,
 	.client > div,
@@ -32,23 +29,25 @@
 	textarea,
 	select,
 	table.form select,
-	.tool-tip--artist {
-		background: var(--site-background);
+	.tool-tip--artist,
+	.tag {
+		background-color: var(--site-background);
 		color: var(--font-color);
 	}
 
 	.bg-white,
 	.bg-black,
-	.scrub,
 	.publishing-articles .client,
 	.empty td,
+	.highlight-box,
+	.global-search,
 	.license-legend tr:nth-child(2n+1) > td,
-	.highlight-box {
-		background: var(--site-background);
+	tr:nth-child(2n) > td {
+		background-color: var(--site-background);
 	}
 
 	.panel,
-	tr:nth-child(2n) > td,
+	.one-line,
 	.events-no-featured-message,
 	.publishing-articles .article-banner,
 	.podcast-form input[type="text"],
@@ -57,25 +56,12 @@
 	.podcast-form textarea,
 	.podcast-form input[type="radio"] ~ label::before,
 	.podcast-form input[type="checkbox"] ~ label::before {
-		background: var(--container-background);
+		background-color: var(--container-background);
 	}
 
-	.artwork,
-	.image-wrapper,
-	.featured-artwork img {
-		border: 2px solid var(--font-color);
-	}
-
-	.artwork:hover,
-	.artwork:active,
-	.image-wrapper:hover,
-	.image-wrapper:active,
-	.featured-artwork img:hover,
-	.featured-artwork img:active {
-		border-color: var(--accent-color);
-	}
-
-	.side-banner {
+	.scrub,
+	.side-banner,
+	.bg-black {
 		background-color: var(--container-background);
 	}
 
@@ -101,68 +87,221 @@
 		filter: invert(0.835);
 	}
 
+
+	.banner .gradient {
+		background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, var(--container-background) 90%);
+	}
+
 	.gradient {
 		background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, var(--site-background) 100%);
 	}
 
-	input,
-	select,
+	/* Buttons */
 	button,
-	.button,
-	.filter-list li button,
-	.button--white,
-	.button--cta,
-	.button--black,
-	.cl-white .button--white,
-	.cl-white .blog-tags .button,
-	.blog-tags .button,
-	.button-form {
-		background: var(--site-background);
-		border: 2px solid var(--font-color);
+	.button {
+		border-color: var(--accent-color);
 		color: var(--font-color);
 	}
 
-	input:focus,
-	textarea:focus,
+	/* Hover */
+	button:active,
+	button:hover,
+	.button:active,
+	.button:hover,
+	.button--cta:active,
+	.button--cta:hover {
+		color: var(--font-color);
+	}
+
+	.cl-white a.button:hover,
+	.cl-white a.button:active {
+		color: var(--font-color);
+	}
+
+	button:active,
+	button:hover,
+	.button:active,
+	.button:hover,
+	.panel .button-list .selected-year {
+		background: var(--accent-color)
+	}
+
+	.button--cta:active,
+	.button--cta:hover {
+		background: var(--site-background);
+		border-color: var(--site-background);
+	}
+
+
+
+	/* Special Buttons  */
+	.cl-white .button--home-view,
+	.cl-white .button--cta:active,
+	.cl-white .button--cta:hover,
+	.cl-white .button.button--cta:hover {
+		background: var(--site-background);
+		border-color: var(--site-background);
+		color: var(--font-color);
+	}
+
+	.cl-white .button--home-play:hover span {
+		color: var(--font-color);
+	}
+
+	/* White Buttons */
+	.button--white,
+	.cl-white .button--white {
+		background: var(--site-background);
+		color: var(--font-color);
+		border-color: var(--site-background);
+	}
+
+	.button--white:active,
+	.button--white:hover,
+	.cl-white .button--white:active,
+	.cl-white .button--white:hover {
+		background: var(--accent-color);
+		border-color: var(--accent-color);
+		color: var(--font-color);
+	}
+
+	/* Black Buttons */
+	.button--black {
+		color: var(--font-color);
+		border-color: var(--font-color-transparent);
+		background: transparent;
+	}
+
+	.button--black:active,
+	.button--black:hover {
+		color: var(--font-color);
+		border-color: var(--font-color);
+		background: transparent;
+	}
+
+	/* Transparent Buttons */
+	.button--transparent,
+	.button--transparent:active,
+	.button--transparent:hover {
+		background: transparent;
+		border-color: transparent;
+	}
+
+	/* Gold Buttons */
+	.button--mcatgold-dark {
+		color: var(--site-background);
+		background: #f1d383;
+		border-color: #f1d383;
+	}
+
+	.button--mcatgold-dark:active,
+	.button--mcatgold-dark:hover {
+		color: goldenrod;
+		border-color: goldenrod;
+		background: var(--site-background);
+	}
+
+	.button--mcatgold {
+		color: var(--font-color);
+		border-color: #f1d383;
+	}
+
+	.button--mcatgold:active,
+	.button--mcatgold:hover {
+		color: var(--site-background);
+		background: #f1d383;
+	}
+
+	/* Podcast Button */
+	.button-form {
+		background: var(--container-background);
+		border-color: var(--container-background);
+		color: var(--font-color);
+	}
+
+	.button-form:hover,
+	.button-form:focus {
+		background: var(--accent-color);
+		color: var(--container-background);
+		border-color: var(--accent-color);
+	}
+
+	/* Filter Buttons */
+	.filter-list li button {
+		background: var(--container-background);
+		color: var(--font-color)
+	}
+
 	.filter-list li button:focus,
 	.filter-list li button:hover,
 	.filter-list li button:active,
-	.filter-list li button.check,
-	.button--full:hover,
-	.button--full:active,
-	.button--white:active,
-	.button--white:hover,
-	.button--cta:active,
-	.button--cta:hover,
-	.button--black:active,
-	.button--black:hover,
-	.cl-white .button--white:active,
-	.cl-white .button--white:hover,
-	.cl-white a.button:hover,
-	.cl-white a.button:active,
-	.cl-white .button--cta:active,
-	.cl-white .button--cta:hover,
-	.cl-white .button.button--cta:hover,
-	.cl-white .blog-tags .button:active,
-	.cl-white .blog-tags .button:hover,
-	.blog-tags .button:active,
-	.blog-tags .button:hover,
-	.button-form:hover,
-	.button-form:focus {
-		background: var(--site-background);
-		border: 2px solid var(--accent-color);
-		color: var(--accent-color);
+	.filter-list li button.check {
+		background: var(--accent-color);
+		color: var(--font-color)
 	}
 
+	/* Text */
+	.cl-white h1,
+	.cl-white h2,
+	.cl-white h3,
+	.cl-white h4,
+	.cl-white h5,
+	.cl-white a,
 	.white,
-	p,
 	.podcast-form input[type="radio"] ~ label,
 	.podcast-form input[type="checkbox"] ~ label,
 	.previous-podcast .title,
-	.social-grid .social-grid-wrapper {
+	.social-grid .social-grid-wrapper,
+	.cl-white p.date,
+	.event-list label.city,
+	.mcat-mast .mcat-mobile-nav > ul li > a {
 		color: var(--font-color);
 	}
 
+
+	/* Inputs */
+	.global-search input[type="text"],
+	.podcast-form input[type="text"],
+	.podcast-form input[type="email"],
+	.podcast-form input[type="number"],
+	.podcast-form textarea,
+	.podcast-form input[type="checkbox"] ~ label:hover::after,
+	.podcast-form input[type="checkbox"]:checked ~ label::after,
+	.podcast-form input[type="checkbox"]:checked ~ label:hover::after {
+		color: var(--font-color);
+	}
+
+	input {
+		border-color: var(--font-color);
+	}
+
+	input:focus,
+	textarea:focus {
+		border-color: var(--accent-color);
+	}
+
+	/* Lines */
+	hr,
+	.line-top::before,
+	.mcat-mast .mcat-nav ul li a::after,
+	.nav-item::before,
+	.global-search::before,
+	.cl-white .line-bottom::after,
+	.cl-white .line-top::before,
+	footer .footer-items li a::before,
+	footer .footer-items li button::before,
+	.mcat-mast .mcat-mobile-nav .hamburger-icon .line,
+	.mcat-mast .mcat-mobile-nav .hamburger-icon.active .line {
+		background: var(--font-color);
+	}
+
+	.loader {
+		border-color: #666;
+		border-top-color: var(--font-color);
+	}
+
+	/* Links */
+	/* Normal */
 	a,
 	table.events a.buy-tickets,
 	.mcat-mast .mcat-nav ul li a,
@@ -173,34 +312,14 @@
 	.drop-box a:hover,
 	.link-bottom,
 	.drop-box a,
-	ul.gold-perks li {
+	ul.gold-perks li,
+	.cl-white .art-list li a label,
+	.panel .button-list .selected-year {
 		color: var(--font-color);
 	}
 
-	.global-search input[type="text"],
-	.podcast-form input[type="text"],
-	.podcast-form input[type="email"],
-	.podcast-form input[type="number"],
-	.podcast-form textarea {
-		color: var(--font-color);
-	}
-
-	.mcat-mast .mcat-nav ul li a:focus,
-	.mcat-mast .mcat-nav ul li a:hover,
-	button.faux {
-		color: var(--font-color);
-	}
-
-	.line-top::before,
-	.mcat-mast .mcat-nav ul li a::after {
-		background: var(--font-color);
-	}
-
-	.loader {
-		border-color: #666;
-		border-top-color: var(--font-color);
-	}
-
+	/* Hover */
+	/* Change color */
 	a:hover,
 	a:active,
 	h1 a,
@@ -218,8 +337,16 @@
 	.cl-white a:active,
 	.cl-white a:hover,
 	.cl-white button.faux:active,
-	.cl-white button.faux:hover {
+	.cl-white button.faux:hover,
+	.cl-white .art-list li a:hover label {
 		color: var(--accent-color);
+	}
+
+	/* Keep color */
+	.mcat-mast .mcat-nav ul li a:focus,
+	.mcat-mast .mcat-nav ul li a:hover,
+	button.faux {
+		color: var(--font-color);
 	}
 
 	header:hover .scrub > .progress,
@@ -244,82 +371,90 @@
 	.creator-wrapper {
 		background-image: linear-gradient(rgba(51, 51, 51, 0.6), rgba(51, 51, 51, 0.6)), url("https://www.monstercat.com/img/banner-2.jpg");
 	}
-}
 
-@-moz-document url-prefix("https://www.monstercat.com/artists") {
-
-	button,
-	.button {
-		color: var(--accent-color);
+	.cl-white p.date {
+		opacity: 0.7;
 	}
 
-	button:active,
-	button:hover,
-	.button:active,
-	.button:hover,
-	.panel .button-list .selected-year {
-		background: var(--accent-color);
+	.event-list label.city {
+		opacity: 0.85;
 	}
 
-	button,
-	.button,
+	.hover-wrapper {
+		background: #111;
+		color: var(--font-color);
+	}
+
 	.panel .button-list > li:last-child > a {
-		border-color: var(--accent-color);
+		border-right-color: var(--accent-color);
+	}
+
+	.mcat-mobile-nav .global-search {
+		padding: 10px;
 	}
 }
 
-@-moz-document url("https://www.monstercat.com/gold"),
-url("https://www.monstercat.com/account/licenses"),
-url("https://www.monstercat.com/account/gold") {
-	button,
-	.button {
-		background: var(--site-background);
-		border-color: var(--gold);
-		color: var(--gold);
-	}
 
-	button:active,
-	button:hover,
-	.button:active,
-	.button:hover,
-	.cl-white .button--cta:active,
-	.cl-white .button--cta:hover,
-	.cl-white .button.button--cta:hover {
-		background: var(--gold);
-		border-color: var(--gold);
-		color: var(--site-background);
-	}
-}
 
-@-moz-document url("https://www.monstercat.com/playlists") {
-	button:active,
-	button:hover {
-		background: var(--site-background);
-		border: 2px solid var(--accent-color);
-		color: var(--accent-color);
-	}
-}
+
+
 
 @-moz-document domain("shop.monstercat.com") {
+
 
 	ul#nav,
 	header,
 	.searchbox form #q,
-	.footer-template {
-		background: var(--site-background);
+	.footer-template,
+	#product-description form,
+	#product-description,
+	#looked-at,
+	#footer,
+	input[type="text"],
+	input[type="password"],
+	input[type="email"],
+	textarea,
+	select {
+		background-color: var(--site-background);
+	}
+
+	#nav-border {
+		background-color: var(--font-color);
+	}
+
+	#product-description form,
+	#product-description,
+	#looked-at,
+	#footer,
+	input[type="text"],
+	input[type="password"],
+	input[type="email"],
+	textarea,
+	select {
+		border-color: var(--font-color);
 	}
 
 	#footer p,
 	#footer a,
 	#footer h4,
-	ul#footer-icons li a {
-		color: var(--font-color);
-	}
-
+	ul#footer-icons li a,
 	.prod-title,
 	#breadcrumb a,
 	ul#nav li a,
-	.backto a {
+	.backto a,
+	#product-description form,
+	#product-description,
+	#looked-at,
+	#footer,
+	input[type="text"],
+	input[type="password"],
+	input[type="email"],
+	textarea,
+	select,
+	input[type="text"]:focus,
+	input[type="password"]:focus,
+	input[type="email"]:focus,
+	textarea:focus {
 		color: var(--font-color);
 	}
 
@@ -332,38 +467,43 @@ url("https://www.monstercat.com/account/gold") {
 		filter: invert(1);
 	}
 
+	.backto a:hover {
+		color: var(--accent-color);
+	}
 
+
+	.na-box,
 	.button,
 	button,
 	input[type="submit"],
 	input[type="reset"],
 	input[type="button"],
-	input[type="text"],
-	input[type="password"],
-	input[type="email"],
-	textarea,
-	select,
-	input[type="text"]:focus,
-	input[type="password"]:focus,
-	input[type="email"]:focus,
-	textarea:focus {
-		background: var(--site-background);
-		border: 2px solid var(--font-color);
-		color: var(--font-color);
-	}
-
 	.button:hover,
 	button:hover,
 	input[type="submit"]:hover,
 	input[type="reset"]:hover,
 	input[type="button"]:hover {
-		background: var(--site-background);
-		border: 2px solid var(--accent-color);
-		color: var(--accent-color);
+		background: var(--font-color);
+		color: var(--site-background);
+	}
+}
+
+@-moz-document url-prefix("https://www.monstercat.com/catalog") {
+	input,
+	select {
+		background-color: var(--container-background);
 	}
 
+	.button--cta:active,
+	.button--cta:hover {
+		background: var(--container-background);
+		border-color: var(--container-background);
+	}
+}
 
-	.backto a:hover {
-		color: var(--accent-color);
+@-moz-document url-prefix("https://www.monstercat.com/browse") {
+	.filter-list li button {
+		background: var(--site-background);
+		border-color: var(--site-background);
 	}
 }
