@@ -1,24 +1,29 @@
 /* ==UserStyle==
 @name           Monstercat Dark
 @namespace      github.com/openstyles/stylus
-@version        1.1.0
+@version        1.2.0
 @description    A dark theme for Monstercat
+@homepageURL    https://github.com/DayvidKnows/Monstercat-Dark
+@updateURL      https://raw.githubusercontent.com/DayvidKnows/Monstercat-Dark/master/monstercat-dark.user.css
 @license        CC BY-ND 4.0
 @author         DayvidKnows
 @advanced color accent "Accent" #1e90ff
+@advanced color fontColor "Font" #eee
+@advanced color containerBackground "Container Background" #333
+@advanced color siteBackground "Page Background" #222
 ==/UserStyle== */
 @-moz-document domain("monstercat.com") {
 	:root {
-		--site-background: hsl(0, 0%, 13%);
-		--container-background: hsl(0, 0%, 20%);
-		--font-color: hsl(0, 0%, 93%);
-		--font-color-transparent: hsla(0, 0%, 93%, .13);
 		--accent-color: /*[[accent]]*/;
+		--font-color: /*[[fontColor]]*/;
+		--container-background: /*[[containerBackground]]*/;
+		--site-background: /*[[siteBackground]]*/;
 	}
 
 	img.logo-black,
 	.client > div,
-	.side-banner.reporting {
+	.side-banner.reporting,
+	.navbar-brand img {
 		filter: invert(1);
 	}
 
@@ -30,7 +35,8 @@
 	select,
 	table.form select,
 	.tool-tip--artist,
-	.tag {
+	.tag,
+	.navbarFUV {
 		background-color: var(--site-background);
 		color: var(--font-color);
 	}
@@ -61,7 +67,9 @@
 
 	.scrub,
 	.side-banner,
-	.bg-black {
+	.bg-black,
+	.dropdown-menu,
+	#front-form {
 		background-color: var(--container-background);
 	}
 
@@ -103,6 +111,10 @@
 		color: var(--font-color);
 	}
 
+	.button--cta {
+		background: var(--accent-color);
+	}
+
 	/* Hover */
 	button:active,
 	button:hover,
@@ -131,7 +143,6 @@
 		background: var(--site-background);
 		border-color: var(--site-background);
 	}
-
 
 
 	/* Special Buttons  */
@@ -165,10 +176,26 @@
 		color: var(--font-color);
 	}
 
+	/* Dark Buttons */
+	.btn.btn-default {
+		background: var(--container-background);
+		color: var(--font-color);
+		border-color: var(--container-background);
+	}
+
+	.btn.btn-default:active,
+	.btn.btn-default:hover,
+	.open > .dropdown-toggle.btn-default:focus,
+	.open > .dropdown-toggle.btn-default:hover {
+		background: var(--accent-color);
+		color: var(--font-color);
+		border-color: var(--accent-color);
+	}
+
 	/* Black Buttons */
 	.button--black {
 		color: var(--font-color);
-		border-color: var(--font-color-transparent);
+		border-color: var(--container-background);
 		background: transparent;
 	}
 
@@ -241,6 +268,15 @@
 	}
 
 	/* Text */
+	.dropdown-menu li a,
+	.sVotes .sLabel,
+	.navbarFUV .navbar-text,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
 	.cl-white h1,
 	.cl-white h2,
 	.cl-white h3,
@@ -257,7 +293,6 @@
 	.mcat-mast .mcat-mobile-nav > ul li > a {
 		color: var(--font-color);
 	}
-
 
 	/* Inputs */
 	.global-search input[type="text"],
@@ -278,6 +313,15 @@
 	input:focus,
 	textarea:focus {
 		border-color: var(--accent-color);
+	}
+
+	#search-input,
+	#search-input:focus {
+		background-color: var(--container-background) !important;
+	}
+
+	#search-input:focus {
+		border-color: var(--accent-color) !important;
 	}
 
 	/* Lines */
@@ -314,7 +358,8 @@
 	.drop-box a,
 	ul.gold-perks li,
 	.cl-white .art-list li a label,
-	.panel .button-list .selected-year {
+	.panel .button-list .selected-year,
+	.sInfo .sTitle a {
 		color: var(--font-color);
 	}
 
@@ -338,7 +383,8 @@
 	.cl-white a:hover,
 	.cl-white button.faux:active,
 	.cl-white button.faux:hover,
-	.cl-white .art-list li a:hover label {
+	.cl-white .art-list li a:hover label,
+	.sInfo .sTitle a:hover {
 		color: var(--accent-color);
 	}
 
@@ -391,6 +437,13 @@
 
 	.mcat-mobile-nav .global-search {
 		padding: 10px;
+	}
+
+	/* Dropdown */
+	.dropdown-menu > li > a:focus,
+	.dropdown-menu > li > a:hover {
+		background: var(--accent-color);
+		color: var(--font-color);
 	}
 }
 
