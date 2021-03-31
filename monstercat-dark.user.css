@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Monstercat Dark
 @namespace      github.com/openstyles/stylus
-@version        1.2.2
+@version        1.2.3
 @description    A dark theme for Monstercat
 @homepageURL    https://github.com/DayvidKnows/Monstercat-Dark
 @updateURL      https://raw.githubusercontent.com/DayvidKnows/Monstercat-Dark/master/monstercat-dark.user.css
@@ -14,16 +14,17 @@
 ==/UserStyle== */
 @-moz-document domain("monstercat.com") {
 	:root {
-		--accent-color: /*[[accent]]*/;
-		--font-color: /*[[fontColor]]*/;
-		--container-background: /*[[containerBackground]]*/;
-		--site-background: /*[[siteBackground]]*/;
+		--accent-color: /*[[accent]]*/ ;
+		--font-color: /*[[fontColor]]*/ ;
+		--container-background: /*[[containerBackground]]*/ ;
+		--site-background: /*[[siteBackground]]*/ ;
 	}
 
 	img.logo-black,
 	.client > div,
 	.side-banner.reporting,
-	.navbar-brand img {
+	.navbar-brand img,
+	.symbol {
 		filter: invert(1);
 	}
 
@@ -49,7 +50,7 @@
 	.empty td,
 	.highlight-box,
 	.global-search,
-	.license-legend tr:nth-child(2n+1) > td,
+	.license-legend tr:nth-child(2n + 1) > td,
 	tr:nth-child(2n) > td {
 		background-color: var(--site-background);
 	}
@@ -87,7 +88,6 @@
 	#content-creator-licenses > div:nth-child(1) > div,
 	#support-the-artists > div:nth-child(1) > div,
 	#shop-discounts > div:nth-child(1) > div,
-
 	#discord > div:nth-child(1) > div,
 	#reddit > div:nth-child(1) > div {
 		filter: brightness(0.2);
@@ -97,9 +97,8 @@
 		filter: invert(0.835);
 	}
 
-
 	.banner .gradient {
-		background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, var(--container-background) 90%);
+		background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, black 90%);
 	}
 
 	.gradient {
@@ -137,7 +136,7 @@
 	.button:active,
 	.button:hover,
 	.panel .button-list .selected-year {
-		background: var(--accent-color)
+		background: var(--accent-color);
 	}
 
 	.button--cta:active,
@@ -145,7 +144,6 @@
 		background: var(--site-background);
 		border-color: var(--site-background);
 	}
-
 
 	/* Special Buttons  */
 	.cl-white .button--home-view,
@@ -258,7 +256,7 @@
 	/* Filter Buttons */
 	.filter-list li button {
 		background: var(--container-background);
-		color: var(--font-color)
+		color: var(--font-color);
 	}
 
 	.filter-list li button:focus,
@@ -266,7 +264,7 @@
 	.filter-list li button:active,
 	.filter-list li button.check {
 		background: var(--accent-color);
-		color: var(--font-color)
+		color: var(--font-color);
 	}
 
 	/* Text */
@@ -365,6 +363,10 @@
 		color: var(--font-color);
 	}
 
+	a svg {
+		fill: var(--font-color);
+	}
+
 	/* Hover */
 	/* Change color */
 	a:hover,
@@ -388,6 +390,10 @@
 	.cl-white .art-list li a:hover label,
 	.sInfo .sTitle a:hover {
 		color: var(--accent-color);
+	}
+
+	a svg:hover {
+		fill: var(--accent-color);
 	}
 
 	/* Keep color */
@@ -417,7 +423,8 @@
 	}
 
 	.creator-wrapper {
-		background-image: linear-gradient(rgba(51, 51, 51, 0.6), rgba(51, 51, 51, 0.6)), url("https://www.monstercat.com/img/banner-2.jpg");
+		background-image: linear-gradient(rgba(51, 51, 51, 0.6), rgba(51, 51, 51, 0.6)),
+			url("https://www.monstercat.com/img/banner-2.jpg");
 	}
 
 	.cl-white p.date {
@@ -468,6 +475,7 @@
 	.navigation > .nav-item {
 		display: flex;
 		align-items: flex-end;
+		white-space: nowrap;
 	}
 
 	.controls,
@@ -503,7 +511,6 @@
 	}
 
 	@media screen and (max-width: 992px) {
-
 		.controls,
 		#navigation,
 		.col-xs-hidden {
@@ -514,11 +521,30 @@
 			flex-wrap: wrap;
 		}
 	}
+
+	@media screen and (min-width: 992px) {
+		.global-search::after {
+			content: "";
+			display: inline-block;
+			margin: 0 0.75rem 0 0;
+			width: 2px;
+			vertical-align: middle;
+			height: 18px;
+			background: #eee;
+		}
+
+		.global-search input[type="text"] {
+			border-bottom: 1px solid var(--container-background);
+			margin: 0 0.75rem;
+		}
+
+		.global-search input[type="text"]:focus {
+			border-bottom: 1px solid var(--font-color);
+		}
+	}
 }
 
 @-moz-document domain("shop.monstercat.com") {
-
-
 	ul#nav,
 	header,
 	.searchbox form #q,
@@ -531,7 +557,8 @@
 	input[type="password"],
 	input[type="email"],
 	textarea,
-	select {
+	select,
+	.input-wrapper {
 		background-color: var(--site-background);
 	}
 
@@ -580,14 +607,13 @@
 	}
 
 	#logo,
-	.rte img {
+	.site-logo img {
 		filter: invert(1);
 	}
 
 	.backto a:hover {
 		color: var(--accent-color);
 	}
-
 
 	.na-box,
 	.button,
@@ -605,7 +631,8 @@
 	}
 }
 
-@-moz-document url-prefix("https://www.monstercat.com/catalog") {
+@-moz-document url-prefix("https://www.monstercat.com/catalog")
+{
 	input,
 	select {
 		background-color: var(--container-background);
@@ -618,7 +645,8 @@
 	}
 }
 
-@-moz-document url-prefix("https://www.monstercat.com/browse") {
+@-moz-document url-prefix("https://www.monstercat.com/browse")
+{
 	.filter-list li button {
 		background: var(--site-background);
 		border-color: var(--site-background);
