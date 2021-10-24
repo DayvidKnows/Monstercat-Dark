@@ -1,3 +1,9 @@
+## Archive notice
+
+On 10.10.2021 Monstercat overhauled their website using a dark base.
+
+---
+
 # Monstercat-Dark
 
 Dark-themed UserStyle for Monstercat
